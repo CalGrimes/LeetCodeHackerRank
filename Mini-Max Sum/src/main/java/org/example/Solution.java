@@ -18,20 +18,24 @@ class Result {
         // Sort array because why not
         Collections.sort(arr);
 
-        int minVal = -1;
-        int maxVal = -1;
-
-        int arrSize = arr.size();
-
+        long minVal = -1;
+        // 10^9
+        long maxVal = -1;
 
 
-        int lastElement = -1;
-        for (int i = 0; i < arr.size(); i++) {
+
+
+        long lastElement = -1;
+        long sum = 0;
+        for (int i = 0; i < 5; i++) {
             // pop last element off list and store
             lastElement = arr.remove(arr.size() - 1);
+            sum = 0;
 
             // sum all elements in list
-            int sum = arr.stream().mapToInt(Integer::intValue).sum();
+            for (int j = 0; j < arr.size(); j++) {
+                sum+=(long)arr.get(j);
+            }
 
             if (sum < minVal || minVal == -1) {
                 minVal = sum;
@@ -39,7 +43,7 @@ class Result {
                 maxVal = sum;
             }
 
-            arr.add(0, lastElement);
+            arr.add(0, (int)lastElement);
         }
 
         System.out.println(minVal + " " + maxVal);
